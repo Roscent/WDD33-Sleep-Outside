@@ -1,0 +1,160 @@
+CINEMATCH: Social Movie Discovery App
+
+Project Overview: Problem, Solution, and Target Audience
+
+Category	Description
+
+Problem/Opportunity:	The "What should we watch?" dilemma. Users spend significant time scrolling through streaming services and search engines trying to find a movie 
+                      they'll enjoy, often giving up or settling. This process is fragmented: finding a recommendation and finding where it's streaming are two separate,
+                      frustrating tasks.
+Solution	CINEMATCH:  Is a streamlined, social-friendly discovery app. A user provides a movie they love, and the app instantly provides curated, high-quality recommendations.
+                      It then aggregates current streaming availability, solving the "where to watch" problem instantly. Enhanced features like shared watchlists and group 
+                      sessions make movie planning collaborative and fun.
+Target Audience:    	Movie enthusiasts and casual viewers aged 18-45. This includes:
+                      • The "Decision Makers": Tasked with choosing the next movie for their group.
+                      • The "Busy Professionals": Value their time and want a quick, relevant recommendation.
+                      • The "Explorers": Enjoy discovering hidden gems based on their unique tastes.
+
+Target Audience & Service
+
+Target Audience:  The core audience is streaming service subscribers who are looking to maximize their viewing time and find highly relevant content quickly.
+
+How it serves them:
+              •	Relevance: Leverages user-loved movies to provide genuinely similar content, ensuring higher satisfaction than generic, algorithm-driven feeds.
+              •	Efficiency: Eliminates the need to use separate search engines or manually check multiple streaming apps. This immediate utility is the app's key value proposition.
+              •	Engagement & Social Connection: A clean, beautiful interface and features like shared watchlists and group sessions turn a chore into a fun, interactive, and social experience.
+
+Visual Design System
+
+•	Color Scheme:
+          o	Primary: #0F1C2E (Dark Navy) - for headers, footers, and primary surfaces.
+          o	Secondary: #1f3a5c (Lighter Navy) - for cards and secondary elements.
+          o	Accent 1: #4fc3f7 (Light Sky Blue) - for primary buttons, links, and highlights.
+          o	Accent 2: #ff6b6b (Coral) - for special actions or warnings (e.g., "Not Streaming").
+          o	Background: #f8f9fa (Off-White) - for the main app background.
+          o	Text: #333333 (Dark Gray) on light backgrounds, #ffffff (White) on dark backgrounds.
+•	Typography:
+          o	Headlines: Poppins (Bold 700) - A modern, geometric sans-serif for impact.
+          o	Body/Buttons: Inter (Regular 400 / SemiBold 600) - A highly readable and web-optimized sans-serif.
+          o	Fallback Stack: font-family: 'Poppins', 'Inter', sans-serif;
+•	Iconography: A consistent line icon set from Font Awesome or Heroicons will be used for actions like search, heart (favorites), share, and group, ensuring a clean and intuitive user interface.
+
+Major Application Functions
+
+#	Function Name	Purpose and Detail	Course Concepts Demonstrated
+          1	Initial Movie Input & Search	Allows the user to type the title of a movie they love. Implements a dynamic search dropdown that suggests movies as the user types, using the TMDB API.
+            User Input Handling, Dynamic Search Suggestions, Debouncing.
+          2	Get Movie ID & Details	After the user confirms a selection, this function calls the TMDB API to retrieve the unique Movie ID and core details (title, poster, year)
+            for the selected film.	First API Call, Data Retrieval, JSON Parsing.
+          3	Fetch Similar Movies	Using the Movie ID from Function 2, this calls the TMDB "Similar Movies" endpoint to retrieve a list of related films.
+            Second API Call, Data Relationships.
+          4	Filter & Sort Recommendations	Processes the raw list of similar movies. It filters out films with a low vote_average (e.g., below 6.0) and sorts the remaining list
+            by a combination of popularity and similarity score.	Filtering Complex Data, Sorting Algorithms.
+          5	Render Recommendation Cards	Dynamically displays the top 8 similar movies as visually engaging cards in the main results area. Each card displays the poster,
+            title, release year, and a hover-over effect showing a brief overview.	DOM Manipulation, Creating a Visual UI, Dynamic HTML/CSS.
+          6	Find Streaming Availability	For each recommended movie, this function uses its Movie ID to call the WatchMode API. It parses the response to extract which
+            streaming services (Netflix, Hulu, etc.) currently offer the movie.	Asynchronous Programming (async/await), Third-Party API Integration, Error Handling.
+          7	Display Streaming Badges	After retrieving streaming data, this function appends small, recognizable service logos (e.g., Netflix "N") as badges to each corresponding movie card.
+            It also handles cases where a movie is not available for streaming.	Dynamic UI Updates, Event Listeners, Conditional Rendering.
+          8	Create & Manage Watchlist	Allows an authenticated user to click a "heart" icon on any movie card to add or remove it from their personal watchlist, which is persisted in localStorage.
+            Data Persistence, CRUD Operations (Create, Read, Update), UI State Management.
+          9	Generate Shareable Link	Creates a unique, shareable URL (e.g., cinematch.app/share/abc123) that, when opened, pre-loads the app with the original search 
+            movie and its recommendations, perfect for collaborative planning.	URL Parameter Handling, Object 
+
+Wireframes
+
+Wireframe 1: Initial Search Screen
+This screen is clean and focused, designed to minimize decision fatigue and get the user to their results as quickly as possible.
++------------------------------------------------------------------------+
+| [CINEMATCH logo]                                        [Login Icon]   |
+|                                                                        |
+|                                                                        |
+|                                                                        |
+|  Hey! Find your next favorite movie.                                  |
+|                                                                        |
+|  +-------------------------------------------------------------+       |
+|  | [Search Icon] Tell us a movie you love...                   |       |
+|  +-------------------------------------------------------------+       |
+|                                                                        |
+|  +---------------------------------+  +---------------------------------+
+|  | [Movie Poster: The Dark Knight] |  | [Movie Poster: Inception]      |
+|  | The Dark Knight      [Heart]    |  | Inception             [Heart]  |
+|  +---------------------------------+  +---------------------------------+
+|                                                                        |
+|  [Footer: Your personal movie matchmaker. © 2024 CINEMATCH.]          |
++------------------------------------------------------------------------+
+
+Wireframe 2: Results Screen
+This screen displays the core value: high-quality recommendations paired with immediate streaming availability.
++------------------------------------------------------------------------+
+| [CINEMATCH logo] < Back to Search                     [User Avatar]    |
+|                                                                        |
+|  Because you liked: **The Dark Knight**                               |
+|                                                                        |
+|  Here are your matches:                                               |
+|                                                                        |
+|  +-----------------+  +-----------------+  +-----------------+         |
+|  | [Inception      |  | [Se7en Poster]  |  | [Memento Poster]|         |
+|  |      Poster]    |  |                 |  |                 |         |
+|  +-----------------+  +-----------------+  +-----------------+         |
+|  | Inception (2010)|  | Se7en (1995)    |  | Memento (2000)  |         |
+|  | [Netflix][Prime]|  | [Max] [Hulu]    |  | [Prime]         |         |
+|  +-----------------+  +-----------------+  +-----------------+         |
+|                                                                        |
+|  +-----------------+  +-----------------+  +-----------------+         |
+|  | [Pulp Fiction   |  | [Heat Poster]   |  | [The Prestige  |         |
+|  |      Poster]    |  |                 |  |         Poster]|         |
+|  +-----------------+  +-----------------+  +-----------------+         |
+|  | Pulp Fiction    |  | Heat (1995)     |  | The Prestige   |         |
+|  | (1994) [Max]    |  | [Netflix]       |  | (2006)[Disney+]|         |
+|  +-----------------+  +-----------------+  +-----------------+         |
+|                                                                        |
+|  [Footer]                                                              |
++------------------------------------------------------------------------+
+
+Mock Data Structure & Technical Challenge
+    To challenge the use of JSON/JS and demonstrate sophisticated data handling, the TMDB response for "Similar Movies" will be a complex array of objects.
+    Example TMDB API Response Snippet (/movie/{id}/similar):
+
+json
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/hZkgoQYus5vegHoetLkCJzb17zJ.jpg",
+      "genre_ids": [18, 53, 80],
+      "id": 550,
+      "original_language": "en",
+      "original_title": "Fight Club",
+      "overview": "A ticking-time-bomb insomniac and a slippery soap salesman...",
+      "popularity": 78.489,
+      "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+      "release_date": "1999-10-15",
+      "title": "Fight Club",
+      "video": false,
+      "vote_average": 8.4,
+      "vote_count": 26299
+    }
+    // ... 19 more movie objects
+  ],
+  "total_pages": 15,
+  "total_results": 291
+}
+
+The JavaScript code will need to:
+          1.	Access the results array from the complex JSON object.
+          2.	Iterate over the array to process each movie object.
+          3.	Filter the array based on vote_average and release_date to exclude low-rated or very old films.
+          4.	Sort the filtered array based on a custom algorithm (e.g., (vote_average * popularity)).
+          5.	Slice the sorted array to get the top 8 results.
+          6.	Dynamically construct the image URL using the poster_path and a base URL provided by TMDB.
+          7.	Pass the correct id for each movie to the subsequent WatchMode API call.
+          8.	Handle potential errors, such as missing poster paths or failed API requests.
+
+7. Initial File List
+    File Name	Purpose
+        index.html:	The main structure of the application (initial input, results area, header/footer).
+        style.css:	All styling for layout, typography, responsiveness, color scheme, and interactive effects (e.g., card hover).
+        cinematch.js:	All core application logic: API calls (TMDB & WatchMode), data handling, filtering, and DOM manipulation.
+        auth.js:	(Optional) Handles user authentication and watchlist synchronization.

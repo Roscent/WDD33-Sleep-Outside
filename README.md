@@ -25,3 +25,5 @@ _BYU-Pathway Worldwide improves lives through access to spiritually based, onlin
 
 
 
+## Netlify randomized URL
+stunning-sunshine-31dda3.netlify.app
