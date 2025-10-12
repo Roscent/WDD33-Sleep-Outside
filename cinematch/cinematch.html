@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CINEMATCH">
+  <meta name="author" content="ROSCENT NKEMJIKA OFUONYE">
+  <title>CINEMATCH - Social Movie Discovery</title>
+  <link rel="stylesheet" href="styles/cinematch.css">
+  <script src="scripts/date.js" defer></script>
+  <script src="scripts/cinematch.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">CINEMATCH</div>
+        <div class="user-actions">
+          <button class="icon-btn" id="loginBtn">👤</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="search-screen" id="searchScreen">
+        <h2>Hey! Find your next favorite movie.</h2>
+        <div class="search-form">
+          <input type="text" class="search-input" id="searchInput" placeholder="Tell us a movie you love...">
+          <button class="search-btn" id="searchBtn">🔍</button>
+          <div class="search-suggestions" id="searchSuggestions"></div>
+        </div>
+
+        <div class="popular-movies" id="popularMovies">
+          <!-- Popular movies will be dynamically loaded here -->
+        </div>
+      </section>
+
+      <section class="results-screen" id="resultsScreen">
+        <button class="back-btn" id="backBtn">← Back to Search</button>
+
+        <div class="results-header">
+          <h2>Here are your matches:</h2>
+          <p>Because you liked: <span class="original-movie" id="originalMovie"></span></p>
+        </div>
+
+        <div class="results-grid" id="resultsGrid">
+          <!-- Results will be dynamically loaded here -->
+        </div>
+      </section>
+
+      <div class="loading" id="loadingState" style="display: none;">
+        Finding your perfect movie matches...
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Your personal movie matchmaker. © 2025 CINEMATCH.</p>
+      <p>Roscent Nkemjika Ofuonye</p>
+    </div>
+  </footer>
+</body>
+
+</html>
